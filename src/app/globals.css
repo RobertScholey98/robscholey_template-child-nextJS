@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+@import '@robscholey/shell-kit/ui/theme.css';
+
+/* Scan shell-kit source for Tailwind classes used by shared components */
+@source '../../node_modules/@robscholey/shell-kit/src';
