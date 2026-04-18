@@ -14,7 +14,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@robscholey/shell-kit": "link:../robscholey_shell-kit",
+    "@robscholey/shell-kit": "workspace:*",
     "next": "16.2.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
