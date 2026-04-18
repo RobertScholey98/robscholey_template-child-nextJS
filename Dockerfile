@@ -46,7 +46,6 @@ RUN addgroup -S -g 1001 nodejs && adduser -S -u 1001 -G nodejs nextjs
 
 COPY --from=builder --chown=nextjs:nodejs /app/robscholey_template-child-nextJS/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/robscholey_template-child-nextJS/.next/static ./robscholey_template-child-nextJS/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/robscholey_template-child-nextJS/public ./robscholey_template-child-nextJS/public
 
 USER nextjs
 EXPOSE 3002
