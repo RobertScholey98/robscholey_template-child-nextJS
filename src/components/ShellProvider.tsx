@@ -3,17 +3,14 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  configure,
+  ShellKitProvider,
   useShellContext,
   useRouteSync,
   ShellBackButton,
 } from '@robscholey/shell-kit';
 import { ShellContextProvider } from './ShellContext';
 
-// Configure shell-kit with the shell's origin on module load
-configure({
-  shellOrigin: process.env.NEXT_PUBLIC_SHELL_ORIGIN || 'http://localhost:3000',
-});
+const SHELL_ORIGIN = process.env.NEXT_PUBLIC_SHELL_ORIGIN || 'http://localhost:3000';
 
 /** Props for the {@link ShellProvider} component. */
 export interface ShellProviderProps {
@@ -31,6 +28,18 @@ export interface ShellProviderProps {
  * the shell state (user, JWT, theme) from any child component.
  */
 export function ShellProvider({ children }: ShellProviderProps) {
+  return (
+    <ShellKitProvider config={{ shellOrigin: SHELL_ORIGIN }}>
+      <ShellProviderInner>{children}</ShellProviderInner>
+    </ShellKitProvider>
+  );
+}
+
+/**
+ * Inner provider that consumes shell-kit hooks. Split from {@link ShellProvider}
+ * so the hooks resolve against the surrounding {@link ShellKitProvider}.
+ */
+function ShellProviderInner({ children }: ShellProviderProps) {
   const router = useRouter();
 
   const shell = useShellContext((path) => {
