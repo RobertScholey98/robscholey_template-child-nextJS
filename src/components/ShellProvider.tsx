@@ -29,7 +29,11 @@ export interface ShellProviderProps {
  */
 export function ShellProvider({ children }: ShellProviderProps) {
   return (
-    <ShellKitProvider config={{ shellOrigin: SHELL_ORIGIN }}>
+    <ShellKitProvider
+      config={{ shellOrigin: SHELL_ORIGIN }}
+      defaultTheme="dark"
+      defaultAccent="teal"
+    >
       <ShellProviderInner>{children}</ShellProviderInner>
     </ShellKitProvider>
   );

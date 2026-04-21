@@ -13,8 +13,10 @@ const mockShellState: ShellContextState = {
   isSessionValid: true,
   subPath: null,
   theme: 'light',
+  accent: 'teal',
   requestJWTRefresh: vi.fn(),
   requestThemeChange: vi.fn(),
+  requestAccentChange: vi.fn(),
 };
 
 function wrapper({ children }: { children: ReactNode }) {
