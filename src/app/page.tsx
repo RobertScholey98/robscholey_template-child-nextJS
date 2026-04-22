@@ -17,16 +17,16 @@ export default function Home() {
           shell-kit integration with the postMessage bridge.
         </Typography>
 
-        <div className="rounded-xl border bg-card p-4 space-y-2">
+        <div className="rounded-xl border bg-surface p-4 space-y-2">
           <Typography variant="mono-label">Shell Context</Typography>
           <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-            <dt className="text-muted-foreground">Embedded:</dt>
+            <dt className="text-text-muted">Embedded:</dt>
             <dd>{isEmbedded ? 'Yes' : 'No (standalone)'}</dd>
-            <dt className="text-muted-foreground">User:</dt>
+            <dt className="text-text-muted">User:</dt>
             <dd>{user ? user.name : 'None'}</dd>
-            <dt className="text-muted-foreground">JWT:</dt>
+            <dt className="text-text-muted">JWT:</dt>
             <dd className="truncate">{jwt ? `${jwt.slice(0, 20)}...` : 'None'}</dd>
-            <dt className="text-muted-foreground">Theme:</dt>
+            <dt className="text-text-muted">Theme:</dt>
             <dd>{theme}</dd>
           </dl>
         </div>
