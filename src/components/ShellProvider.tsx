@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   ShellKitProvider,
@@ -19,21 +18,21 @@ export interface ShellProviderProps {
 
 /**
  * Wraps the app with shell-kit integration. Handles:
- * - Shell context (user, JWT, theme, embedded state)
+ * - Shell context (user, JWT, embedded state)
  * - Route sync (sends route changes to the shell)
  * - Navigate-to-path (shell tells child to navigate on back/forward)
  * - Back button (shown when embedded in the shell)
  *
+ * Theme + accent are page-owned now: the layout SSR-renders the
+ * admin-configured default into `<html data-*>` and `<PageTheme>`
+ * overrides at the route level. The shell observes via `page-theme`.
+ *
  * Use the `useShell()` hook from `@/components/ShellContext` to access
- * the shell state (user, JWT, theme) from any child component.
+ * the shell state (user, JWT, embedded) from any child component.
  */
 export function ShellProvider({ children }: ShellProviderProps) {
   return (
-    <ShellKitProvider
-      config={{ shellOrigin: SHELL_ORIGIN }}
-      defaultTheme="dark"
-      defaultAccent="teal"
-    >
+    <ShellKitProvider config={{ shellOrigin: SHELL_ORIGIN }}>
       <ShellProviderInner>{children}</ShellProviderInner>
     </ShellKitProvider>
   );
@@ -52,17 +51,12 @@ function ShellProviderInner({ children }: ShellProviderProps) {
 
   useRouteSync();
 
-  // Apply theme from shell
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', shell.theme === 'dark');
-  }, [shell.theme]);
-
   return (
     <ShellContextProvider value={shell}>
       <ShellBackButton
         isEmbedded={shell.isEmbedded}
         showBackButton={shell.showBackButton}
-        className="fixed top-4 left-4 z-50 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+        className="fixed top-4 left-4 z-[60] rounded-md bg-accent-deep px-3 py-1.5 text-sm font-medium text-accent hover:bg-accent-deep/90 transition-colors"
       />
       {children}
     </ShellContextProvider>

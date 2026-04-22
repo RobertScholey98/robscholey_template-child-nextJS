@@ -6,7 +6,7 @@ import { useShell } from '@/components/ShellContext';
 
 /** Home page — displays shell context info and navigation to example sub-page. */
 export default function Home() {
-  const { isEmbedded, user, jwt, theme } = useShell();
+  const { isEmbedded, user, jwt } = useShell();
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6">
@@ -26,8 +26,6 @@ export default function Home() {
             <dd>{user ? user.name : 'None'}</dd>
             <dt className="text-text-muted">JWT:</dt>
             <dd className="truncate">{jwt ? `${jwt.slice(0, 20)}...` : 'None'}</dd>
-            <dt className="text-text-muted">Theme:</dt>
-            <dd>{theme}</dd>
           </dl>
         </div>
 

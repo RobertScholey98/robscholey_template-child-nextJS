@@ -12,11 +12,7 @@ const mockShellState: ShellContextState = {
   jwt: 'test-jwt',
   isSessionValid: true,
   subPath: null,
-  theme: 'light',
-  accent: 'teal',
   requestJWTRefresh: vi.fn(),
-  requestThemeChange: vi.fn(),
-  requestAccentChange: vi.fn(),
 };
 
 function wrapper({ children }: { children: ReactNode }) {
@@ -32,7 +28,6 @@ describe('useShell', () => {
     expect(result.current.isEmbedded).toBe(true);
     expect(result.current.user?.name).toBe('Rob');
     expect(result.current.jwt).toBe('test-jwt');
-    expect(result.current.theme).toBe('light');
   });
 
   it('throws when used outside provider', () => {
